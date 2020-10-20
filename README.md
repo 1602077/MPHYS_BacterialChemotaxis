@@ -1,0 +1,8 @@
+# MPHYS_BacterialChemotaxis
+Codes used for master's dissertation studying "Bacterial Chemotaxis of Bacillus subtilis under Antibiotic Challenge"
+
+KellerSegel_ModelFitting.m solves the Keller-Segel equation - which describes bacterial transport in the presence of a chemo - attract/ repellant, using the Nedler-Mead simplex algorithm for fitting of parameters by minimising the sum of residuals squared of the model against the measured data. Sensitivity analysis performed by varying the initial estimate of parameters was used to confirm that the optimisation is finding the global minimum of parameters in the constructed parameter space.
+
+Particle tracking was performed through using the Pretrack_wrapper.m and TrackPlot_wrapper.m. These wrappers all use bpass.m, cntrd.m, pkfnd.m and track.m, which are MATALB adaptations of IDL tracking algorithms written by J. Crocker and D. Grier (J. C. Crocker, D. G. Grier, Journal of Colloid and Interface Science 179, 298 (1996)).
+
+Pretracking was a time consuming task and was seperated from the Trackplot_wrapper to allow for batching of data to be processed on the university hpc network using the Slurm workload manager. Trackplot_wrapper then extracts the generated tracks, calculating the tumbling rate and average velocity of bacteria. The behaviour of B. sub was the analysed through studying the changes in these two paramaters in the presence of varying chemoattract and antibiotic concentrations. Autocorr_wrapper plots the tracks and calculates tumbling rate and velocity, while calculating the autocorrealation function over all tracks, which was used through fining tuning of hyperparameters used to define what constitutes a partcile to be tracked and how tracks are constructed over a number of frames.
